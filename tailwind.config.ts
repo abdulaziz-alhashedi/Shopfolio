@@ -15,4 +15,6 @@ export default {
     },
   },
   plugins: [],
+  // Enable RTL support - Tailwind CSS has built-in RTL support
+  // No additional configuration needed for basic RTL functionality
 } satisfies Config;
