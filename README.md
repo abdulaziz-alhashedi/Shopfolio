@@ -1,6 +1,6 @@
 # 🛍️ Shopfolio – E-commerce Demo (Next.js + Firebase)
 
-**Shopfolio** is a modern, bilingual (English & Arabic) e-commerce demo built using **Next.js**, **Firebase**, and **TailwindCSS**.  
+**Shopfolio** is a modern, bilingual (English & Arabic) e-commerce demo built using **Next.js**, **Firebase**, and **TailwindCSS**.
 It showcases frontend skills, design practices, and internationalization — designed as a portfolio piece to demonstrate readiness for roles in the Gulf tech market.
 
 ---
@@ -47,9 +47,26 @@ It showcases frontend skills, design practices, and internationalization — des
 ## 🔧 Setup Instructions
 
 1. **Clone this repo**
-2. Run `npm install`
-3. Add your `.env.local` with Firebase config and API base URL
-4. Run `npm run dev`
+2. Run `pnpm install` (or `npm install`)
+3. **Set up Firebase** (see `FIREBASE_SETUP.md` for detailed guide)
+4. Copy `.env.local.example` to `.env.local` and fill in your Firebase config
+5. Run `pnpm dev` (or `npm run dev`)
+
+### Quick Start
+
+```bash
+# Install dependencies
+pnpm install
+
+# Copy environment template
+cp .env.local.example .env.local
+
+# Edit .env.local with your Firebase config
+# (See FIREBASE_SETUP.md for detailed instructions)
+
+# Start development server
+pnpm dev
+```
 
 ---
 
