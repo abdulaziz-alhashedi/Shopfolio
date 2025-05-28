@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import I18nProvider from "./components/I18nProvider";
 import LanguageWrapper from "./components/LanguageWrapper";
+import AuthProvider from "./components/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +21,11 @@ export const metadata: Metadata = {
     "Modern bilingual e-commerce platform with Arabic and English support",
   keywords: "ecommerce, shopping, arabic, english, bilingual, rtl",
   authors: [{ name: "Shopfolio Team" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -35,7 +40,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <I18nProvider>
-          <LanguageWrapper>{children}</LanguageWrapper>
+          <LanguageWrapper>
+            <AuthProvider>{children}</AuthProvider>
+          </LanguageWrapper>
         </I18nProvider>
       </body>
     </html>
