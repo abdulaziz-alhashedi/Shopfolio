@@ -2,7 +2,7 @@
 
 import { useTranslation as useI18nextTranslation } from 'react-i18next';
 import { useLanguageStore } from '@/app/store/languageStore';
-import { Language, Namespace, NAMESPACES } from '@/app/lib/i18n';
+import { Language, Namespace } from '@/app/lib/i18n';
 import { useEffect } from 'react';
 
 // Custom hook that combines i18next with our language store
@@ -18,15 +18,19 @@ export const useTranslation = (namespace: Namespace = 'common') => {
   }, [language, i18n]);
 
   // Enhanced translation function with fallback
-  const translate = (key: string, options?: any) => {
+  const translate = (key: string, options?: any): string => {
     try {
       const translation = t(key, options);
+      // Ensure we always return a string
+      const translationStr = typeof translation === 'string' ? translation : key;
+
       // If translation is the same as key, it means no translation was found
-      if (translation === key && namespace !== 'common') {
+      if (translationStr === key && namespace !== 'common') {
         // Try to get translation from common namespace as fallback
-        return t(`common:${key}`, options) || key;
+        const fallback = t(`common:${key}`, options);
+        return typeof fallback === 'string' ? fallback : key;
       }
-      return translation;
+      return translationStr;
     } catch (error) {
       console.warn(`Translation error for key "${key}":`, error);
       return key;
@@ -75,10 +79,10 @@ export const useLanguageSwitcher = () => {
   const switchLanguage = async (newLanguage: Language) => {
     try {
       setLanguage(newLanguage);
-      
+
       // TODO: Sync with Firebase user preferences
       // This will be implemented when we integrate with useAuth
-      
+
       return true;
     } catch (error) {
       console.error('Failed to switch language:', error);
