@@ -7,13 +7,22 @@ const nextConfig: NextConfig = {
   i18n: {
     locales: ['en', 'ar'],
     defaultLocale: 'en',
-    localeDetection: true,
+    localeDetection: false,
   },
 
-  // Enable experimental features for better i18n support
-  experimental: {
-    // Enable server components with i18n
-    serverComponentsExternalPackages: ['i18next', 'react-i18next'],
+  // External packages for server components
+  serverExternalPackages: ['i18next', 'react-i18next'],
+
+  // Image configuration for external domains
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.dummyjson.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 

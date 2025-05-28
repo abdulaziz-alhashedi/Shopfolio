@@ -46,25 +46,39 @@ This plan breaks down the development of the Shopfolio e-commerce app into **8 f
 
 ---
 
-## 🔓 Step 4: Authentication Pages
+## ✅ Step 4: Authentication Pages
 
-- [ ] Create login page:
+- [x] Create login page (`app/auth/login/page.tsx`):
   - Google Sign-In button
   - Email field to request magic link (OTP)
-- [ ] On login success:
+- [x] Email link completion page (`app/auth/complete/page.tsx`)
+- [x] On login success:
   - Create new user doc in Firestore if not exists
   - Save language and theme preferences
-- [ ] Add route guard or session provider
+- [x] Add route guard or session provider (`app/components/RouteGuard.tsx`)
+- [x] Authentication context provider (`app/components/AuthProvider.tsx`)
+- [x] User profile management (`app/profile/page.tsx`)
+- [x] User menu component (`app/components/UserMenu.tsx`)
+- [x] Protected pages (favorites, settings)
+- [x] Language preference sync with Firebase
+- [x] Session persistence and redirect handling
 
 ---
 
-## 🛍️ Step 5: Product UI (from dummyjson)
+## ✅ Step 5: Product UI (from dummyjson)
 
-- [ ] Fetch product data from `https://dummyjson.com/products`
-- [ ] Create:
-  - Product list page with filters/search
-  - Product details page
-- [ ] Create loading and error states
+- [x] Fetch product data from `https://dummyjson.com/products`
+- [x] Create:
+  - Product list page with filters/search (`app/products/page.tsx`)
+  - Product details page (`app/products/[id]/page.tsx`)
+- [x] Create loading and error states
+- [x] Create product store with Zustand (`app/store/productStore.ts`)
+- [x] Create product components (`app/components/ProductCard.tsx`)
+- [x] Add search functionality (`app/components/ProductSearch.tsx`)
+- [x] Add category filtering (`app/components/ProductFilters.tsx`)
+- [x] Add favorites toggle (save to Firestore) (`app/hooks/useFavorites.ts`)
+- [x] Update favorites page with real product data
+- [x] Integrate with authentication and i18n systems
 
 ---
 
