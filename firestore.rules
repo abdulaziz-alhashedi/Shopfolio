@@ -1,0 +1,43 @@
+// Firestore Security Rules for Shopfolio
+// These rules should be deployed to your Firebase project
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Users collection rules
+    match /users/{userId} {
+      // Users can read and write their own document
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Validate user document structure on create/update
+      allow create: if request.auth != null 
+        && request.auth.uid == userId
+        && validateUserData(request.resource.data);
+      
+      allow update: if request.auth != null 
+        && request.auth.uid == userId
+        && validateUserData(request.resource.data)
+        && request.resource.data.uid == userId
+        && request.resource.data.createdAt == resource.data.createdAt;
+    }
+    
+    // Helper function to validate user document structure
+    function validateUserData(data) {
+      return data.keys().hasAll(['uid', 'email', 'name', 'preferredLanguage', 'theme', 'favorites', 'createdAt', 'updatedAt'])
+        && data.uid is string
+        && data.email is string
+        && data.name is string
+        && data.preferredLanguage in ['en', 'ar']
+        && data.theme in ['light', 'dark']
+        && data.favorites is list
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp;
+    }
+    
+    // Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
